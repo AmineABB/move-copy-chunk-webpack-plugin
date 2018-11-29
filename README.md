@@ -30,7 +30,7 @@ const config = {
       {
         actionType: 'move',
         pattern: 'myChunkB.*.js',
-        to: 'movedd.chunk.dir'
+        to: 'moved.chunk.dir'
       }
     ])
   ]
