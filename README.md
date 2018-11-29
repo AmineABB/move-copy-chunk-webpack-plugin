@@ -42,7 +42,7 @@ const config = {
 |Name|Type|Description|
 |:--:|:--:|:---------:|
 |[`actionType`](#actionType)|`{String}`|The type of action that can be used `move` or `copy`
-|[`pattern`](#pattern)|`{String|RegEx}`|The chunk name to apply the action type, you can use RegEx to match chunk name [minimatch options](https://github.com/isaacs/minimatch)
+|[`pattern`](#pattern)|`{String\|RegEx}`|The chunk name to apply the action type, you can use RegEx to match chunk name [minimatch options](https://github.com/isaacs/minimatch)|
 |[`to`](#to)|`{String}`|The path to the destination folder.
 |[`context`](#context)|`{String}`|Path from where the `to` should be resolved
 
