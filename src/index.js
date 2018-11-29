@@ -12,8 +12,8 @@ const pluginName = 'MoveCopyChunkPlugin'
 
 class MoveCopyChunkPlugin {
 	/**
-	 * Creates an instance of CopyMoveChunks.
-	 * @param {CopyMoveChunksOptions} options options passed to CopyMoveChunks
+	 * Creates an instance of MoveCopyChunk.
+	 * @param {MoveCopyChunkOptions} options options passed to MoveCopyChunk
 	 */
 	constructor(options) {
 		if (options !== undefined && !Array.isArray(options)) {

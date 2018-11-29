@@ -1,12 +1,16 @@
 import { asyncRequire } from './asyncRequire'
 
-const test = () => {
+/**
+ * Simple async modules which are used to test output files
+ */
+const initAsyncModules = () => {
 	asyncRequire('moduleA')
 	asyncRequire('moduleB')
 }
+
 /**
- * Simple Fn that require async modules
+ * Fn entry point
  */
-export const initModules = () => {
-	test()
+export default function initTestModules() {
+	initAsyncModules()
 }

@@ -10,7 +10,6 @@
     ],
     "exclude": [
         "test",
-        "mock",
         "**/node_modules/**"
     ],
     "reporter": [
