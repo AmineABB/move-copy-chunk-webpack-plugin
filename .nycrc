@@ -1,0 +1,26 @@
+{
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "extension": [
+        ".js"
+    ],
+    "exclude": [
+        "test",
+        "mock",
+        "**/node_modules/**"
+    ],
+    "reporter": [
+        "lcov",
+        "text"
+    ],
+    "require": [
+        "babel-register"
+    ],
+    "cache": true,
+    "sourceMap": false,
+    "instrument": false
+}

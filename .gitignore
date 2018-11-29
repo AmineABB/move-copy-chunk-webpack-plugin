@@ -1,0 +1,7 @@
+/lib
+node_modules/
+dist/
+test/coverage
+test/.nyc_output
+test/test.**
+.DS_Store

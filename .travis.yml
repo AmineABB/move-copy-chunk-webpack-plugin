@@ -1,0 +1,16 @@
+sudo: false
+language: node_js
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false
+node_js: 9
+branches:
+  only:
+    - master
+script:
+  - npm run validate
+after_success:
+  - npm run coverage
+  - npm run release

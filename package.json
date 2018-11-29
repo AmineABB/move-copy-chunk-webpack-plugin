@@ -1,0 +1,71 @@
+{
+  "name": "move-copy-chunk-webpack-plugin",
+  "version": "0.0.0-semantically-released",
+  "description": "Webpack plugin which allows you to move, copy chunk from output directory to another location after emeting files",
+  "main": "lib/index.js",
+  "scripts": {
+    "commit": "git-cz",
+    "start": "npm run build -- -w",
+    "build": "cross-env NODE_ENV=production babel src/ -d lib --ignore 'test/**/*.test.js'",
+    "clean": "del-cli lib",
+    "lint": "eslint src",
+    "coverage": "cat ./coverage/lcov.info | codecov",
+    "validate": "npm-run-all --parallel clean lint build",
+    "release": "travis-deploy-once && semantic-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmineABB/move-copy-chunk-webpack-plugin.git"
+  },
+  "keywords": [
+    "webpack",
+    "plugin",
+    "chunk",
+    "emit",
+    "move",
+    "copy"
+  ],
+  "files": [
+    "dist"
+  ],
+  "author": {
+    "name": "Amine Abbi",
+    "email": "abbi.amine@gmail.com",
+    "url": "https://github.com/AmineABB"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-eslint": "10.0.1",
+    "babel-plugin-istanbul": "5.1.0",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-preset-env": "1.7.0",
+    "codecov": "3.1.0",
+    "commitizen": "3.0.4",
+    "cz-conventional-changelog": "2.1.0",
+    "del-cli": "1.1.0",
+    "eslint": "5.9.0",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-plugin-import": "2.14.0",
+    "ghooks": "2.0.4",
+    "npm-run-all": "4.1.3",
+    "semantic-release": "15.12.0",
+    "travis-deploy-once": "5.0.9",
+    "validate-commit-msg": "2.14.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    },
+    "ghooks": {
+      "pre-commit": "npm run validate",
+      "commit-msg": "validate-commit-msg"
+    }
+  },
+  "dependencies": {
+    "chalk": "2.4.1",
+    "cross-env": "5.2.0",
+    "fs-extra": "7.0.1",
+    "minimatch": "3.0.4"
+  }
+}
