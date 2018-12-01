@@ -5,12 +5,14 @@ module.exports = {
 		node: true,
 		mocha: true
 	},
+	extends: 'eslint:recommended',
 	parser: 'babel-eslint',
 	rules: {
 		indent: [2, 'tab', { SwitchCase: 1 }],
 		semi: [2, 'never'],
 		'no-tabs': 0,
 		'comma-dangle': 0,
+		'no-console': 0,
 		'no-use-before-define': [2, { functions: false }]
 	}
 }

@@ -15,11 +15,12 @@ class MoveCopyChunkPlugin {
 	 * Creates an instance of MoveCopyChunk.
 	 * @param {MoveCopyChunkOptions} options options passed to MoveCopyChunk
 	 */
-	constructor(options) {
-		if (options !== undefined && !Array.isArray(options)) {
+	constructor(options, globOptions = {}) {
+		if (!Array.isArray(options)) {
 			throw new Error(red(`[${pluginName}]: Fail - Argument should be an array`))
 		}
 		this.options = options
+		this.globOptions = globOptions
 		this.filteredChunks = []
 	}
 
@@ -30,9 +31,6 @@ class MoveCopyChunkPlugin {
 	 */
 	apply(compiler) {
 		compiler.hooks.emit.tap(pluginName, compilation => {
-			if (this.options === undefined) {
-				throw new Error(red(`[${pluginName}]: Fail - No option provided`))
-			}
 			const helper = {
 				options: this.options,
 				fromPath: MoveCopyChunkPlugin.getDefaultOutput(compiler),
@@ -42,7 +40,7 @@ class MoveCopyChunkPlugin {
 			this.parseChunkOptions(helper, MoveCopyChunkPlugin.processChunks, this.filteredChunks)
 		})
 		compiler.hooks.afterEmit.tap(pluginName, () => {
-			MoveCopyChunkPlugin.chunkActionType(this.filteredChunks)
+			this.chunkActionType(this.filteredChunks)
 		})
 	}
 
@@ -84,6 +82,14 @@ class MoveCopyChunkPlugin {
 			Object.values(files).forEach(fileName => chunksFile.push(fileName))
 		})
 		return chunksFile
+	}
+
+	/**
+	 * Helper Fn to check if we can show log console or not
+	 */
+	showLogs(callback) {
+		const { logInfo = true } = this.globOptions
+		logInfo && callback()
 	}
 
 	/**
@@ -136,8 +142,7 @@ class MoveCopyChunkPlugin {
 	 * @param {chunksList} chunks filtred list
 	 * @returns {void}
 	 */
-	static chunkActionType(chunksList) {
-		console.log('\n')
+	chunkActionType(chunksList) {
 		Object.values(chunksList).forEach(data => {
 			const { actionType, ...actionData } = data
 			if (actionType === undefined || actionType === '') {
@@ -145,10 +150,10 @@ class MoveCopyChunkPlugin {
 			}
 			switch (actionType.toLowerCase()) {
 				case 'copy':
-					MoveCopyChunkPlugin.copyChunk(actionData)
+					this.copyChunk(actionData)
 					break
 				case 'move':
-					MoveCopyChunkPlugin.moveChunk(actionData)
+					this.moveChunk(actionData)
 					break
 				default:
 					console.warn(yellow(`${bold(pluginName)}: actionType:${actionType} is not recognized`))
@@ -174,14 +179,16 @@ class MoveCopyChunkPlugin {
 	 * @param {Object} actionData
 	 * @returns {void}
 	 */
-	static actionProcess(actionType, actionData, additionalOptions = {}) {
+	actionProcess(actionType, actionData, additionalOptions = {}) {
 		const { from, to, fileName, context } = actionData
 		const fromPath = MoveCopyChunkPlugin.resolveActionPath(from, fileName)
 		const toPath = MoveCopyChunkPlugin.resolveActionPath(context, `${to}/${fileName}`)
 
 		if (fs.existsSync(fromPath)) {
 			actionType(fromPath, toPath, additionalOptions)
-			console.info(`${bold(pluginName)}: \n Chunk: [${blue(`${fromPath}`)}] \n Saved to: [${blue(`${toPath}`)}]\n`)
+			this.showLogs(() => {
+				console.info(`${bold(pluginName)}: \n Chunk: [${blue(`${fromPath}`)}] \n Saved to: [${blue(`${toPath}`)}]\n`)
+			})
 		} else {
 			console.warn(yellow(`${bold(pluginName)}: ${fromPath} not found`))
 		}
@@ -191,16 +198,16 @@ class MoveCopyChunkPlugin {
 	 * Copy the matched chunk to the given path
 	 * @param {Object} chunk data
 	 */
-	static copyChunk(actionData) {
-		MoveCopyChunkPlugin.actionProcess(fs.copySync, actionData)
+	copyChunk(actionData) {
+		this.actionProcess(fs.copySync, actionData)
 	}
 
 	/**
 	 * Move the matched chunk to the given path
 	 * @param {Object} chunk
 	 */
-	static moveChunk(actionData) {
-		MoveCopyChunkPlugin.actionProcess(fs.moveSync, actionData, { overwrite: true })
+	moveChunk(actionData) {
+		this.actionProcess(fs.moveSync, actionData, { overwrite: true })
 	}
 }
 

@@ -1,8 +1,7 @@
 const { resolve } = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const MoveCopyChunkPlugin = require('../lib')
 
-module.exports = {
+export const baseWebpackConfig = {
 	entry: resolve(__dirname, 'src'),
 	output: {
 		path: resolve(__dirname, 'dist'),
@@ -12,19 +11,5 @@ module.exports = {
 	optimization: {
 		namedChunks: true
 	},
-	plugins: [
-		new CleanWebpackPlugin(['dist', 'test.copied.chunk', 'test.moved.chunk']),
-		new MoveCopyChunkPlugin([
-			{
-				actionType: 'copy',
-				pattern: 'test.*0.*.js',
-				to: 'test.copied.chunk'
-			},
-			{
-				actionType: 'move',
-				pattern: 'test.*2.*.js',
-				to: 'test.moved.chunk'
-			}
-		])
-	]
+	plugins: [new CleanWebpackPlugin(['dist', 'test.copied.chunk', 'test.moved.chunk'])]
 }

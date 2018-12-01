@@ -8,8 +8,10 @@
     "extension": [
         ".js"
     ],
+    "include": [
+        "index.test.js"
+    ],
     "exclude": [
-        "test",
         "**/node_modules/**"
     ],
     "reporter": [
