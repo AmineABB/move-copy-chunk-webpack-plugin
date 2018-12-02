@@ -129,3 +129,23 @@ const config = {
   ])
 ]
 ```
+
+### `Optional options`
+
+|Name|Type|Description|
+|:--:|:--:|:---------:|
+|[`logInfo`](#logInfo)|`{Boolean}`|Enable or disable the log display for the `moved` or `copied` files (by default the value is `true`)
+
+### `logInfo`
+```js
+[
+  new MoveCopyChunkPlugin([
+    {
+      actionType: 'move',
+      pattern: 'myChunkB.*.js',
+      to: 'tmp/asyncChunk'
+    }],
+    { logInfo: false }
+  )
+]
+```
