@@ -20,11 +20,24 @@ export const compileWebpack = (webpack, options) => {
 }
 
 /**
+ * Merge base webpack config with passed config
+ * @param {Object} config
+ * @returns {Object} webpack config
+ */
+export const mergeConfig = config => {
+	const plugins = baseWebpackConfig.plugins.push(config)
+	return {
+		...baseWebpackConfig,
+		...plugins
+	}
+}
+
+/**
  * Webpack build simulator
- * @param {*} webpack
+ * @param {Compiler} webpack
+ * @returns {Promise}
  */
 export const simulateWebpackBuild = (webpack, pluginOption) => {
-	const plugins = baseWebpackConfig.plugins.push(pluginOption)
-	const config = { ...baseWebpackConfig, ...plugins }
+	const config = mergeConfig(pluginOption)
 	return compileWebpack(webpack, config)
 }

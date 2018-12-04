@@ -145,18 +145,17 @@ class MoveCopyChunkPlugin {
 	chunkActionType(chunksList) {
 		Object.values(chunksList).forEach(data => {
 			const { actionType, ...actionData } = data
-			if (actionType === undefined || actionType === '') {
-				throw new Error(red(`[${pluginName}]: Fail - Missing or wrong actionType argument value`))
+
+			if (actionType === undefined || !/move|copy/.test(actionType)) {
+				throw new Error(red(`[${pluginName}]: Fail - actionType:${actionType} is not recognized`))
 			}
+
 			switch (actionType.toLowerCase()) {
 				case 'copy':
 					this.copyChunk(actionData)
 					break
 				case 'move':
 					this.moveChunk(actionData)
-					break
-				default:
-					console.warn(yellow(`${bold(pluginName)}: actionType:${actionType} is not recognized`))
 					break
 			}
 		})
@@ -190,7 +189,9 @@ class MoveCopyChunkPlugin {
 				console.info(`${bold(pluginName)}: \n Chunk: [${blue(`${fromPath}`)}] \n Saved to: [${blue(`${toPath}`)}]\n`)
 			})
 		} else {
-			console.warn(yellow(`${bold(pluginName)}: ${fromPath} not found`))
+			this.showLogs(() => {
+				console.warn(yellow(`${bold(pluginName)}: ${fromPath} not found`))
+			})
 		}
 	}
 

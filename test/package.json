@@ -1,10 +1,6 @@
 {
   "description": "Test MoveCopyChunks Webpack Plugin",
   "main": "dist/index.js",
-  "scripts": {
-    "test": "cross-env NODE_ENV=test nyc mocha ./*.test.js",
-    "coverage": "cat ./coverage/lcov.info | codecov"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AmineABB/move-copy-chunk-webpack-plugin.git"
@@ -23,15 +19,8 @@
   },
   "homepage": "https://github.com/AmineABB/move-copy-chunk-webpack-plugin#readme",
   "devDependencies": {
-    "chai": "4.2.0",
     "clean-webpack-plugin": "1.0.0",
-    "codecov": "3.1.0",
-    "mocha": "5.2.0",
-    "nyc": "13.1.0",
     "webpack": "4.26.1",
     "webpack-cli": "3.1.2"
-  },
-  "dependencies": {
-    "cross-env": "5.2.0"
   }
 }
