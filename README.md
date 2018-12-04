@@ -1,3 +1,9 @@
+[![npm][npm]][npm-url]
+[![build][build]][build-url]
+[![download][download]][download-url]
+[![coverage][cover]][cover-url]
+
+
 <div align="center">
   <a href="https://github.com/webpack/webpack">
     <img width="200" height="200"
@@ -149,3 +155,15 @@ const config = {
   )
 ]
 ```
+
+[npm]: https://img.shields.io/npm/v/move-copy-chunk-webpack-plugin.svg
+[npm-url]: https://npmjs.com/package/move-copy-chunk-webpack-plugin
+
+[build]: https://travis-ci.org/AmineABB/move-copy-chunk-webpack-plugin.svg?branch=master
+[build-url]: https://travis-ci.org/AmineABB/move-copy-chunk-webpack-plugin
+
+[download]: https://img.shields.io/npm/dw/move-copy-chunk-webpack-plugin.svg
+[download-url]: (https://www.npmjs.org/package/move-copy-chunk-webpack-plugin)
+
+[cover]: https://codecov.io/gh/AmineABB/move-copy-chunk-webpack-plugin/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/AmineABB/move-copy-chunk-webpack-plugin
